@@ -1,16 +1,14 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
-import { CreateTodoDto } from './todo.dto';
+import { Todo } from './todo.entity';
+import { TodoService } from './todo.service';
 
 @Controller('todo')
 export class TodoController {
-    @Get()
-    findAll( @Res() res) {
-        res.status(HttpStatus.OK).json([]);
-    }
+  constructor(private readonly todoService: TodoService) {}
 
-    @Post()
-    async create( @Res() res, @Body() createTodoDto: CreateTodoDto) {
-        res.status(HttpStatus.CREATED).send();
-    }
-}   
+  @Get()
+  findAll(): Promise<Todo[]> {
+    return this.todoService.findAll();
+  }
+}

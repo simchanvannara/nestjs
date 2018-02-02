@@ -1,15 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AppController } from './app.controller';
-import { TodoController } from './todo/todo.controller';
+import { PhotoModule } from './photo/photo.module';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(),
-  ],
-  controllers: [AppController, TodoController],
-  components: [],
+  imports: [TypeOrmModule.forRoot(), PhotoModule, TodoModule],
 })
-
 export class ApplicationModule {}
